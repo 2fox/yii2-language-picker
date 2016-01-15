@@ -18,13 +18,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```json
-php composer.phar require --prefer-dist twofox/yii2-language-picker "1.*"
+php composer.phar require --prefer-dist 2fox/yii2-language-picker "1.*"
 ```
 
 or add
 
 ```json
-"twofox/yii2-language-picker": "1.*"
+"2fox/yii2-language-picker": "1.*"
 ```
 
 to the require section of your `composer.json` file.
