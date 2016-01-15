@@ -56,35 +56,6 @@ class Component extends \yii\base\Component
      * @var function - function to execute after changing the language of the site.
      */
     public $callback;
-
-    /**
-     * @var integer expiration date of the cookie storing the language of the site.
-     */
-    public $expireDays = 30;
-
-    /**
-     * @var string Name of the cookie.
-     */
-    public $cookieName = 'language';
-
-    /**
-     * @var string The domain that the language cookie is available to.
-     * For details see the $domain parameter description of PHP setcookie() function.
-     */
-    public $cookieDomain = '';
-
-    /**
-     * @var array List of available languages
-     *  Formats supported in the pre-defined skins:
-     * 
-     * ~~~
-     *  ['en', 'de', 'es']
-     *  ['en' => 'English', 'de' => 'Deutsch', 'fr' => 'Français']
-     *  ['en-US', 'de-DE', 'fr-FR']
-     *  ['en-US' => 'English', 'de-DE' => 'Deutsch', 'fr-FR' => 'Français']
-     * ~~~
-     * 
-     */
     public $languages;
 
     /**
