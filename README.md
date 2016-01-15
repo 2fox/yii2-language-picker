@@ -15,16 +15,16 @@ Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
+add
 
 ```json
-php composer.phar require --prefer-dist 2fox/yii2-language-picker "1.*"
-```
-
-or add
-
-```json
-"2fox/yii2-language-picker": "1.*"
+"require": {
+        "twofox/yii2-language-picker": "*"
+},
+"repositories": [{
+        "type": "git",
+        "url": "https://twofox:@bitbucket.org/twofox/yii2-language-picker.git"
+}],
 ```
 
 to the require section of your `composer.json` file.
