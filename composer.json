@@ -1,10 +1,10 @@
 {
-    "name": "2fox/yii2-language-picker",
+    "name": "fox_yii/yii2-language-picker",
     "description": "Yii2 Language Picker Widget",
     "type": "yii2-extension",
     "autoload": {
         "psr-4": {
-            "twofox\\languagepicker\\": ""
+            "fox_yii\\languagepicker\\": ""
         }
     },
     "require": {
