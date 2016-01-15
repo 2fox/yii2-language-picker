@@ -31,9 +31,6 @@ use Yii;
  *      'languagepicker' => [
  *          'class' => 'lajax\languagepicker\Component',
  *          'languages' => ['en-US', 'de-DE', 'fr-FR'],     // List of available languages
- *          'cookieName' => 'language',                     // Name of the cookie.
- *          'cookieDomain' => 'example.com',                // Domain of the cookie.
- *          'expireDays' => 64,                             // The expiration time of the cookie is 64 days.
  *          'callback' => function() {
  *              if (!\Yii::$app->user->isGuest) {
  *                  $user = User::findOne(\Yii::$app->user->id);
@@ -103,7 +100,6 @@ class Component extends \yii\base\Component
     {
 
         Yii::$app->language = $language;
-        $this->saveLanguageIntoCookie($language);
 
         if (is_callable($this->callback)) {
             call_user_func($this->callback);
@@ -125,7 +121,6 @@ class Component extends \yii\base\Component
         foreach ($acceptableLanguages as $language) {
             if ($this->_isValidLanguage($language)) {
                 Yii::$app->language = $language;
-                $this->saveLanguageIntoCookie($language);
                 return;
             }
         }
@@ -135,27 +130,10 @@ class Component extends \yii\base\Component
             foreach ($this->languages as $key => $value) {
                 if (preg_match('/^' . $pattern . '/', $value) || preg_match('/^' . $pattern . '/', $key)) {
                     Yii::$app->language = $this->_isValidLanguage($key) ? $key : $value;
-                    $this->saveLanguageIntoCookie(Yii::$app->language);
                     return;
                 }
             }
         }
-    }
-
-    /**
-     * Save language into cookie.
-     * @param string $language
-     */
-    public function saveLanguageIntoCookie($language)
-    {
-        $cookie = new \yii\web\Cookie([
-            'name' => $this->cookieName,
-            'domain' => $this->cookieDomain,
-            'value' => $language,
-            'expire' => time() + 86400 * $this->expireDays
-        ]);
-
-        Yii::$app->response->cookies->add($cookie);
     }
 
     /**
