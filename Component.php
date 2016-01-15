@@ -1,6 +1,6 @@
 <?php
 
-namespace lajax\languagepicker;
+namespace twofox\languagepicker;
 
 use Yii;
 
@@ -91,21 +91,6 @@ class Component extends \yii\base\Component
      */
     public function initLanguage()
     {
-        if (isset($_GET['language-picker-language'])) {
-            if ($this->_isValidLanguage($_GET['language-picker-language'])) {
-                return $this->saveLanguage($_GET['language-picker-language']);
-            } else if (!Yii::$app->request->isAjax) {
-                return $this->_redirect();
-            }
-        } else if (Yii::$app->request->cookies->has($this->cookieName)) {
-            if ($this->_isValidLanguage(Yii::$app->request->cookies->getValue($this->cookieName))) {
-                Yii::$app->language = Yii::$app->request->cookies->getValue($this->cookieName);
-                return;
-            } else {
-                Yii::$app->response->cookies->remove($this->cookieName);
-            }
-        }
-
         $this->detectLanguage();
     }
 
