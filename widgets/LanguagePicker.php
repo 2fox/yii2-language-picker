@@ -1,6 +1,6 @@
 <?php
 
-namespace lajax\languagepicker\widgets;
+namespace twofox\languagepicker\widgets;
 
 use Yii;
 use yii\helpers\Url;
@@ -88,8 +88,8 @@ class LanguagePicker extends \yii\base\Widget
      * @var array List of pre-defined skins.
      */
     private $_SIZES = [
-        self::SIZE_SMALL => 'lajax\languagepicker\bundles\LanguageSmallIconsAsset',
-        self::SIZE_LARGE => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+        self::SIZE_SMALL => 'twofox\languagepicker\bundles\LanguageSmallIconsAsset',
+        self::SIZE_LARGE => 'twofox\languagepicker\bundles\LanguageLargeIconsAsset',
     ];
 
     /**
@@ -129,7 +129,7 @@ class LanguagePicker extends \yii\base\Widget
      * @var string Adding JavaScript and its dependencies.
      * Changing languages is done through Ajax by default. If you do not wish to use Ajax, set value to null.
      */
-    public $languagePluginAsset = 'lajax\languagepicker\bundles\LanguagePluginAsset';
+    public $languagePluginAsset = 'twofox\languagepicker\bundles\LanguagePluginAsset';
 
     /**
      * @var array List of available languages.
@@ -157,7 +157,6 @@ class LanguagePicker extends \yii\base\Widget
         if (empty($config['languages']) || !is_array($config['languages'])) {
             $config['languages'] = Yii::$app->languagepicker->languages;
         }
-
         return parent::widget($config);
     }
 
@@ -166,9 +165,7 @@ class LanguagePicker extends \yii\base\Widget
      */
     public function init()
     {
-
         $this->_initSkin();
-
         parent::init();
     }
 
@@ -188,7 +185,7 @@ class LanguagePicker extends \yii\base\Widget
             $languagePicker = $this->_renderDropdown($isInteger);
         }
 
-        echo $languagePicker;
+        return $languagePicker;
     }
 
     /**
@@ -290,7 +287,7 @@ class LanguagePicker extends \yii\base\Widget
             $name = Html::encode($name);
         }
 
-        $params = array_merge([''], Yii::$app->request->queryParams, ['language-picker-language' => $language]);
+        $params = array_merge([''], Yii::$app->request->queryParams, ['language' => $language]);
         return strtr($template, [
             '{link}' => Url::to($params),
             '{name}' => $name,
