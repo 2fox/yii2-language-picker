@@ -1,6 +1,6 @@
 <?php
 
-namespace lajax\languagepicker\bundles;
+namespace twofox\languagepicker\bundles;
 
 use yii\web\AssetBundle;
 
@@ -14,7 +14,7 @@ class LanguageSmallIconsAsset extends AssetBundle {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/lajax/yii2-language-picker/assets';
+    public $sourcePath = '@vendor/twofox/yii2-language-picker/assets';
 
     /**
      * @inheritdoc
