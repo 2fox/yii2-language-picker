@@ -6,11 +6,11 @@ use Yii;
 
 /**
  * Component.
- * 
+ *
  * Examples:
- * 
+ *
  * Minimal code:
- * 
+ *
  * ~~~
  * 'language' => 'en',
  * 'bootstrap' => ['languagepicker'],
@@ -21,9 +21,9 @@ use Yii;
  *      ]
  * ],
  * ~~~
- * 
+ *
  * Complete example:
- * 
+ *
  * ~~~
  * 'language' => 'en-US',
  * 'bootstrap' => ['languagepicker'],
@@ -41,14 +41,14 @@ use Yii;
  *      ]
  * ]
  * ~~~
- * 
+ *
  *
  * @author Lajos Molnar <lajax.m@gmail.com>
  * @since 1.0
  */
 class Component extends \yii\base\Component
 {
-    
+
     /**
      * @var function - function to execute after changing the language of the site.
      */
@@ -88,7 +88,7 @@ class Component extends \yii\base\Component
      */
     public function initLanguage()
     {
-        $this->detectLanguage();
+        //$this->detectLanguage();
     }
 
     /**
