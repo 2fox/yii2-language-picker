@@ -137,9 +137,9 @@ class LanguagePicker extends \yii\base\Widget
      * 
      * ~~~
      *  ['en', 'de', 'es']
-     *  ['en' => 'English', 'de' => 'Deutsch', 'fr' => 'FranÃ§ais']
+     *  ['en' => 'English', 'de' => 'Deutsch', 'fr' => 'Français']
      *  ['en-US', 'de-DE', 'fr-FR']
-     *  ['en-US' => 'English', 'de-DE' => 'Deutsch', 'fr-FR' => 'FranÃ§ais']
+     *  ['en-US' => 'English', 'de-DE' => 'Deutsch', 'fr-FR' => 'Français']
      * ~~~
      */
     public $languages;
