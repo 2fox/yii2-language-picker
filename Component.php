@@ -88,7 +88,22 @@ class Component extends \yii\base\Component
      */
     public function initLanguage()
     {
-        //$this->detectLanguage();
+        if (isset($_GET['picker-language'])) {
+            if ($this->_isValidLanguage($_GET['picker-language'])) {
+                return $this->saveLanguage($_GET['picker-language']);
+            } else if (!Yii::$app->request->isAjax) {
+                return $this->_redirect();
+            }
+        } else if (Yii::$app->request->cookies->has($this->cookieName)) {
+            if ($this->_isValidLanguage(Yii::$app->request->cookies->getValue($this->cookieName))) {
+                Yii::$app->language = Yii::$app->request->cookies->getValue($this->cookieName);
+                return;
+            } else {
+                Yii::$app->response->cookies->remove($this->cookieName);
+            }
+        }
+        
+        $this->detectLanguage();
     }
 
     /**

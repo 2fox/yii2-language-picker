@@ -137,9 +137,9 @@ class LanguagePicker extends \yii\base\Widget
      * 
      * ~~~
      *  ['en', 'de', 'es']
-     *  ['en' => 'English', 'de' => 'Deutsch', 'fr' => 'Français']
+     *  ['en' => 'English', 'de' => 'Deutsch', 'fr' => 'Franï¿½ais']
      *  ['en-US', 'de-DE', 'fr-FR']
-     *  ['en-US' => 'English', 'de-DE' => 'Deutsch', 'fr-FR' => 'Français']
+     *  ['en-US' => 'English', 'de-DE' => 'Deutsch', 'fr-FR' => 'Franï¿½ais']
      * ~~~
      */
     public $languages;
@@ -287,9 +287,8 @@ class LanguagePicker extends \yii\base\Widget
             $name = Html::encode($name);
         }
 
-        $params = array_merge([''], Yii::$app->request->queryParams, ['language' => $language]);
         return strtr($template, [
-            '{link}' => Url::to($params),
+            '{link}' => Url::current(['language' => $language]),
             '{name}' => $name,
             '{language}' => $language,
         ]);
