@@ -46,8 +46,7 @@ use Yii;
  * @author Lajos Molnar <lajax.m@gmail.com>
  * @since 1.0
  */
-class Component extends \yii\base\Component
-{
+class Component extends \lajax\languagepicker\Component{
 
     /**
      * @var function - function to execute after changing the language of the site.
