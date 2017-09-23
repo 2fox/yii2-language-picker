@@ -45,6 +45,9 @@ Identifier of the language element. e.g.: en, en-US
         'languages' => ['en', 'de', 'fr']                   // List of available languages (icons only)
     ]
 ],
+'on beforeAction' => function ($event) {
+    \Yii::$app->languagepicker->initLanguage();
+}
 ```
 
 ####Minimal configuration (icons and text)
