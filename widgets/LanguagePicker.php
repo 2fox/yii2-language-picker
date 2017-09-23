@@ -288,7 +288,7 @@ class LanguagePicker extends \yii\base\Widget
         }
 
         return strtr($template, [
-            '{link}' => Url::current(['language' => $language]),
+            '{link}' => Url::current(['language' => $language, 'picker-language' => $language]),
             '{name}' => $name,
             '{language}' => $language,
         ]);
