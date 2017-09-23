@@ -1,0 +1,15 @@
+{
+    "name": "twofox/yii2-language-picker",
+    "description": "Yii2 Language Picker Widget",
+    "type": "yii2-extension",
+    "autoload": {
+        "psr-4": {
+            "twofox\\languagepicker\\": ""
+        }
+    },
+    "require": {
+        "yiisoft/yii2": "*",
+        "lajax/yii2-translate-manager": "1.*",
+        "phpspec/php-diff": ">=1.0.2"
+    }
+}
