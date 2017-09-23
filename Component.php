@@ -3,7 +3,6 @@
 namespace twofox\languagepicker;
 
 use Yii;
-use yii\helpers\Url;
 
 /**
  * Component.
@@ -47,25 +46,13 @@ use yii\helpers\Url;
  * @author Lajos Molnar <lajax.m@gmail.com>
  * @since 1.0
  */
-class Component extends \yii\base\Component{
+class Component extends \lajax\languagepicker\Component{
 
     /**
      * @var function - function to execute after changing the language of the site.
      */
     public $callback;
     public $languages;
-    public $cookieName = 'language';
-
-    /**
-     * @var integer expiration date of the cookie storing the language of the site.
-     */
-    public $expireDays = 30;
-
-    /**
-     * @var string The domain that the language cookie is available to.
-     * For details see the $domain parameter description of PHP setcookie() function.
-     */
-    public $cookieDomain = '';
 
     /**
      * @inheritdoc
@@ -87,7 +74,11 @@ class Component extends \yii\base\Component{
     /**
      * @inheritdoc
      */
-    public function init(){
+    public function init()
+    {
+
+        $this->initLanguage();
+
         parent::init();
     }
 
@@ -96,21 +87,22 @@ class Component extends \yii\base\Component{
      */
     public function initLanguage()
     {
-        if ($language = Yii::$app->request->get('picker-language', false)) {
-            if ($this->_isValidLanguage($language)) {
-                $this->saveLanguage($language);
+        if (isset($_GET['picker-language'])) {
+            if ($this->_isValidLanguage($_GET['picker-language'])) {
+                return $this->saveLanguage($_GET['picker-language']);
+            } else if (!Yii::$app->request->isAjax) {
+                return $this->_redirect();
             }
         } else if (Yii::$app->request->cookies->has($this->cookieName)) {
-            $language = Yii::$app->request->cookies->getValue($this->cookieName);
-            if ($this->_isValidLanguage($language)) {
-                if($language != Yii::$app->language)
-                    return $this->_redirect($language);
+            if ($this->_isValidLanguage(Yii::$app->request->cookies->getValue($this->cookieName))) {
+                Yii::$app->language = Yii::$app->request->cookies->getValue($this->cookieName);
+                return;
             } else {
                 Yii::$app->response->cookies->remove($this->cookieName);
             }
         }
         
-        //$this->detectLanguage();
+        $this->detectLanguage();
     }
 
     /**
@@ -118,31 +110,20 @@ class Component extends \yii\base\Component{
      * @param string $language - The language to save.
      * @return static
      */
-    public function saveLanguage($language){
+    public function saveLanguage($language)
+    {
+
         Yii::$app->language = $language;
+
         if (is_callable($this->callback)) {
             call_user_func($this->callback);
         }
 
-        $this->saveLanguageIntoCookie($language);
-    }
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->end();
+        }
 
-
-
-    /**
-     * Save language into cookie.
-     * @param string $language
-     */
-    public function saveLanguageIntoCookie($language)
-    {
-        $cookie = new \yii\web\Cookie([
-            'name' => $this->cookieName,
-            'domain' => $this->cookieDomain,
-            'value' => $language,
-            'expire' => time() + 86400 * $this->expireDays
-        ]);
-
-        Yii::$app->response->cookies->add($cookie);
+        return $this->_redirect();
     }
 
     /**
@@ -173,8 +154,10 @@ class Component extends \yii\base\Component{
      * Redirects the browser to the referer URL.
      * @return static
      */
-    private function _redirect($language){
-        return Yii::$app->response->redirect(Url::current(['language'=>$language]));
+    private function _redirect()
+    {
+        $redirect = Yii::$app->request->absoluteUrl == Yii::$app->request->referrer ? '/' : Yii::$app->request->referrer;
+        return Yii::$app->response->redirect($redirect);
     }
 
     /**
