@@ -14,7 +14,7 @@ class LanguageLargeIconsAsset extends AssetBundle {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/twofox/yii2-language-picker/assets';
+    public $sourcePath = '@vendor/2fox/yii2-language-picker/assets';
 
     /**
      * @inheritdoc
