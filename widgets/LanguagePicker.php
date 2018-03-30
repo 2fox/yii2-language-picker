@@ -254,6 +254,7 @@ class LanguagePicker extends \yii\base\Widget
         $this->_registerAssets();
     }
 
+
     /**
      * Adding Assets files to view.
      */
